@@ -3,22 +3,32 @@
 const recButton = document.getElementById('record');
 const cancelButton = document.getElementById('cancel');
 const successDisplay = document.getElementById('success-display');
-const failDisplay = document.getElementById('fail-display')
+const failDisplay = document.getElementById('fail-display');
 
+
+// new speech recognition object
+var SpeechRecognition = SpeechRecognition || webkitSpeechRecognition;
+const eng = new SpeechRecognition();
 
 
 
 
 function runSpeechRecognition() {
-  // new speech recognition object
-  var SpeechRecognition = SpeechRecognition || webkitSpeechRecognition;
-  const eng = new SpeechRecognition();
+
+
+  successDisplay.innerText = '';
+  failDisplay.innerText = '';
+
+  let hasResult = false;
+
+
 
   // This runs when the speech recognition service starts
   eng.onstart = function () {
     recButton.classList.add('pulsate-fwd');
     cancelButton.classList.remove('hidden');
     cancelButton.onclick = () => eng.abort();
+    console.log('on start');
   };
 
 
@@ -26,6 +36,11 @@ function runSpeechRecognition() {
     recButton.classList.remove('pulsate-fwd');
     cancelButton.classList.add('hidden');
     eng.stop();
+    if (!hasResult) {
+      runSpeechRecognition();
+    }
+    // console.log('on end', hasResult);
+
   }
 
   // This runs when the speech recognition service returns result
@@ -36,17 +51,20 @@ function runSpeechRecognition() {
 
     if (isValid) {
       successDisplay.innerText = transcript
+      hasResult = true;
     }
     else {
       failDisplay.innerText = 'Not number'
     }
-    console.log("word  ----     ", transcript);
-    console.log("result ----",);
+    console.log('on result', transcript);
+    // console.log("word  ----     ", );
+    // console.log("result ----",);
   };
 
   // start recognition
   eng.lang = "ru";
   eng.start();
+
 }
 
 const validate = (text) => {
