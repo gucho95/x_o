@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Document</title>
+  <link rel="stylesheet" href="./styles/index.css" />
+  <link rel="stylesheet" href="./styles/animations.css" />
+</head>
+
+<body class="flex-center">
+
+  <button onclick="runSpeechRecognition()" class="button-circle" id='record'>
+    <img src="./images/microphone.svg">
+  </button>
+
+  <button class="button-circle hidden" id='cancel'>
+    <img src="./images/cancel.svg">
+  </button>
+
+  <div class="display success" id="success-display">
+  </div>
+
+  <div class="display fail" id="fail-display">
+  </div>
+
+
+
+
+  <script src="./scripts/index.js"></script>
+  <script src="./scripts/speech.js"></script>
+</body>
+
+</html>
