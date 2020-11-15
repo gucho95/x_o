@@ -17,3 +17,5 @@ const getColumn = (num) => {
 };
 
 createBoard();
+
+let b = 12
