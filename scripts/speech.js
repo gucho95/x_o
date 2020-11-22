@@ -1,9 +1,5 @@
-/* JS comes here */
 
-const recButton = document.getElementById('record');
-const cancelButton = document.getElementById('cancel');
-const successDisplay = document.getElementById('success-display');
-const failDisplay = document.getElementById('fail-display');
+
 
 
 // new speech recognition object
@@ -11,9 +7,11 @@ var SpeechRecognition = SpeechRecognition || webkitSpeechRecognition;
 const eng = new SpeechRecognition();
 
 
-
-
 function runSpeechRecognition() {
+  const successDisplay = document.getElementById('success-display');
+  const failDisplay = document.getElementById('fail-display');
+  const recButton = document.getElementById('record');
+  const cancelButton = document.getElementById('cancel');
 
 
   successDisplay.innerText = '';
@@ -50,10 +48,14 @@ function runSpeechRecognition() {
     const isValid = validate(transcript);
 
     if (isValid) {
-      successDisplay.innerText = transcript
+      const number = Number(transcript);
+      successDisplay.innerText = number
+      failDisplay.innerText = '';
       hasResult = true;
+      addX(number);
     }
     else {
+      successDisplay.innerText = '';
       failDisplay.innerText = 'Not number'
     }
     console.log('on result', transcript);
@@ -81,3 +83,14 @@ const validate = (text) => {
     return false;
   }
 };
+
+
+const addX = (index) => {
+  const board = document.getElementsByClassName('board')[0];
+  board.children[index - 1].innerText = 'X';
+}
+
+const addO = (index) => {
+  const board = document.getElementsByClassName('board')[0];
+  board.children[index - 1].innerText = 'O';
+}

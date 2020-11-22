@@ -1,6 +1,8 @@
-* {
+
+
+  * {
   box-sizing: border-box;
-  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-family: 'Comic Neue', cursive;
 }
 body {
   background: #e2e1e0;
@@ -19,7 +21,10 @@ body {
 }
 .column {
   width: 250px;
+  height:  250px;
   border: 1px solid lightgray;
+  font-size: 86px;
+  text-shadow: 3px 3px 3px gray;
 }
 
 .flex-center {
